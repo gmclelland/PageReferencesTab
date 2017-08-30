@@ -119,7 +119,12 @@ class PageReferencesTab extends WireData implements Module, ConfigurableModule {
 
 		// append the markup to the tab and the tab to the form
 		$refTab->append($field);
-		$form->append($refTab);
+		// Processwire handles tabs differently depending on the version 
+		if(ProcessWire::versionMajor == 2 && ProcessWire::versionMinor <= 4){
+			$form->append($refTab);
+		} else {
+			$form->prepend($refTab);
+		}
 	}
 
 	/**
